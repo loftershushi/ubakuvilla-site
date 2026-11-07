@@ -3,15 +3,11 @@
    流れ：静かに雪が降り、下から白い丘が積もる
      → 上の6割にロゴがにじむように現れ、白い丘に英文が一文字ずつ降りてくる
      → 文字が消え、雪が画面いっぱいに積もって真っ白になり、その白がほどけて写真が現れる
-   ・見るのは1回の訪問につき1回だけ（2回目からは飛ばす）。?intro=1 を付けると毎回見られる
+   ・トップを開くたびに毎回出す（2026-11-07 mashuさん。パソコン・スマホとも）
    ・画面を押すと飛ばせる。「動きを減らす」設定の人には出さない
    ========================================================= */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var force = new URLSearchParams(location.search).has('intro');
-  var seen = false;
-  try { seen = sessionStorage.getItem('ubaku-intro') === '1'; sessionStorage.setItem('ubaku-intro', '1'); } catch (e) {}
-  if (seen && !force) return;
   document.documentElement.classList.add('is-intro');   // main.js がこれを見て、hero の切り替えを待つ
 
   var css = document.createElement('style');

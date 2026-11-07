@@ -74,7 +74,7 @@ body.v3 .intro-en p{font-family:'Jost', sans-serif;font-weight:300;font-size:14p
 
 /* 残り時間の金の線（Seasons・Explore 共通。長さは --t） */
 .v3-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:0 50%}
-.is-on > .v3-bar,.is-on > a > .v3-bar{animation:v3-bar var(--t,5s) linear both}
+.is-on > .v3-bar,.is-on > .v3-ex-row > .v3-bar{animation:v3-bar var(--t,5s) linear both}
 .is-held > .v3-bar,.is-held > a > .v3-bar{animation-play-state:paused}
 @keyframes v3-bar{to{transform:scaleX(1)}}
 
@@ -104,13 +104,13 @@ body.v3 .intro-en p{font-family:'Jost', sans-serif;font-weight:300;font-size:14p
 .v3-text p:not(.v3-catch){font-size:14px;line-height:2}
 /* 3つの特長：線が引かれ、絵が線で描かれ、文字が順に現れる */
 .v3-points{list-style:none;margin:clamp(64px,8vw,112px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}
-.v3-points li{position:relative;padding-top:28px;--i:0s}
+.v3-points li{position:relative;padding-top:28px;--i:0s;display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:16px;align-content:start}
 .v3-points li:nth-child(2){--i:.22s}
 .v3-points li:nth-child(3){--i:.44s}
 .v3-points li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(41,70,61,.2)}
 .v3-points li::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.5s var(--ease) var(--i)}
 .v3-points li.is-visible::after{transform:scaleX(1)}
-.v3-pt-icon{display:block;width:56px;height:56px;margin-bottom:18px}
+.v3-pt-icon{display:block;width:56px;height:56px;grid-column:1;grid-row:1 / 3;align-self:center}
 .v3-pt-icon path{fill:none;stroke:var(--green);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s var(--ease) calc(var(--i) + .3s)}
 .v3-points li.is-visible .v3-pt-icon path{stroke-dashoffset:0}
 .v3-points .no,.v3-points h3,.v3-points p{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s var(--ease)}
@@ -118,9 +118,9 @@ body.v3 .intro-en p{font-family:'Jost', sans-serif;font-weight:300;font-size:14p
 .v3-points h3{transition-delay:calc(var(--i) + .65s)}
 .v3-points p{transition-delay:calc(var(--i) + .8s)}
 .v3-points li.is-visible .no,.v3-points li.is-visible h3,.v3-points li.is-visible p{opacity:1;transform:none}
-.v3-points .no{display:block;font-family:var(--f-en);font-weight:300;font-size:14px;color:var(--gold-ink);letter-spacing:.1em}
-.v3-points h3{font-family:var(--f-mincho);font-size:18px;letter-spacing:.14em;margin:6px 0 12px;color:var(--ink)}
-.v3-points p{font-size:13.5px;line-height:2.1;margin:0}
+.v3-points .no{display:block;grid-column:2;align-self:end;font-family:var(--f-en);font-weight:300;font-size:14px;color:var(--gold-ink);letter-spacing:.1em}
+.v3-points h3{grid-column:2;align-self:start;font-family:var(--f-mincho);font-size:18px;letter-spacing:.14em;margin:2px 0 0;color:var(--ink)}
+.v3-points p{grid-column:1 / -1;font-size:13.5px;line-height:2.1;margin:16px 0 0}
 
 /* ---------- ④ Story（全面の写真に文字） ---------- */
 .v3-story{position:relative;min-height:min(96vh,860px);display:flex;align-items:center;color:var(--white);overflow:hidden;background:var(--deep,#1F372F)}
@@ -209,13 +209,13 @@ body.v3 .photos .photo figcaption{left:auto;right:8px;bottom:5px;font-size:11px;
 .v3-ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;flex:1}
 .v3-ex-list li{flex:1;display:flex;border-top:1px solid var(--line)}
 .v3-ex-list li:last-child{border-bottom:1px solid var(--line)}
-.v3-ex-list a{position:relative;display:flex;align-items:center;justify-content:space-between;flex:1;gap:16px;padding:9px 4px;transition:padding .5s var(--ease)}
+.v3-ex-row{position:relative;display:flex;align-items:center;justify-content:space-between;flex:1;gap:16px;padding:9px 4px;transition:padding .5s var(--ease)}
 .v3-ex-list .nm{font-family:var(--f-mincho);font-size:16px;letter-spacing:.1em;color:var(--ink);line-height:1.5;transition:color .4s}
 .v3-ex-list .nm small{display:block;font-family:var(--f-en);font-weight:300;font-size:11.5px;letter-spacing:.06em;color:var(--sub)}
 .v3-ex-list .tm{font-size:12px;color:var(--sub);white-space:nowrap;letter-spacing:.04em}
 .v3-ex-list .tm b{font-family:var(--f-en);font-weight:200;font-size:20px;color:var(--green);margin:0 3px;line-height:1;transition:color .4s}
 .v3-ex-list .v3-bar{bottom:-1px;height:1px}
-.v3-ex-list li.is-on a{padding-left:14px}
+.v3-ex-list li.is-on .v3-ex-row{padding-left:14px}
 .v3-ex-list li.is-on .nm{color:var(--green)}
 .v3-ex-list li.is-on .tm b{color:var(--gold-ink)}
 .v3-ex-note{font-size:12px;color:var(--sub);margin:10px 0 0}
@@ -256,7 +256,7 @@ body.v3 .cta .wrap{position:relative;z-index:1}
 body.v3 .cta-lead{font-family:var(--f-mincho);color:#fff;font-size:clamp(19px,calc(1.5vw + 2px),22px);letter-spacing:.14em;padding-left:.14em;margin-bottom:12px}
 body.v3 .cta-sub{color:rgba(255,255,255,.9)}
 /* 「最もお得」は行を分けて、明るい金で静かに目立たせる */
-body.v3 .cta-best{display:block;margin-top:4px;font-size:15px;font-weight:400;letter-spacing:.1em;color:#E3CC97}
+body.v3 .cta-best{display:block;margin-top:4px;font-size:13px;font-weight:400;letter-spacing:.08em;color:#E3CC97}
 /* ボタンは全体を約10%小さく（文字・余白とも） */
 body.v3 .cta-btn{border-color:var(--gold-light);color:#fff;font-size:13.5px;padding:12.5px clamp(29px,4.5vw,58px)}
 body.v3 .cta-btn small{font-size:10px}
@@ -490,4 +490,9 @@ body.v3 .times-box h3{font-size:18px}
   .v3-seal-letter.is-open .v3-seal-tip::after{content:" →"}
   .v3-seal-letter:hover{box-shadow:0 8px 22px rgba(20,30,26,.22)}
   .v3-seal-letter.is-open{box-shadow:0 0 0 1.5px #23A0DA,0 8px 22px rgba(35,160,218,.3)}
+}
+
+/* トップのニュース：スマホは題名を2行までにして、続きは「…」 */
+@media (max-width:760px){
+  .v3-news .news-lines .t{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 }

@@ -243,7 +243,7 @@
     var m = new Date().getMonth() + 1;
     var start = 0;                                 // 今の月の季節から始める（宿に来る人が「今」を見られるように）
     ss.forEach(function (el, n) { if (el.dataset.m.split(',').indexOf(String(m)) >= 0) start = n; });
-    var pickS = cycle(seasons, ss, 5200, function () {}, start);
+    var pickS = cycle(seasons, ss, 4200, function () {}, start);
     ss.forEach(function (el, n) { el.addEventListener('click', function () { pickS(n); }); });   // スマホは指で選ぶ
   }
 
@@ -253,12 +253,11 @@
     var goEx = wiper(ex.querySelector('.v3-wipe'));
     var exItems = Array.prototype.slice.call(ex.querySelectorAll('.v3-ex-list li'));
     var pickEx = cycle(ex, exItems, 4600, goEx, 0);
-    // 指で操作する画面では、押すとページを移動せず、その場所の写真を見せる（詳しくは View More から）
+    // 指で操作する画面では、押すとその場所の写真を見せる（マウスは乗せるだけで替わる）
     if (window.matchMedia('(hover: none)').matches) {
       var exPhoto = ex.querySelector('.v3-wipe');
       exItems.forEach(function (li, n) {
-        li.querySelector('a').addEventListener('click', function (e) {
-          e.preventDefault();
+        li.addEventListener('click', function () {
           pickEx(n, true);
           var top = exPhoto.getBoundingClientRect().top;
           if (top < 72) window.scrollBy({ top: top - 84, behavior: reduce ? 'auto' : 'smooth' });   // 写真が画面の上に隠れていたら見せる
