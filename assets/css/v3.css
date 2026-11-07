@@ -1,0 +1,466 @@
+/* =========================================================
+   新しい見た目 v3（日本語の全ページ。style.css のあとに読む。body に v3 が付く）
+   ・参考：泊船 HAKUSEN。写真と余白が主役、見出しは小さめ
+   ・書体は今の ubakuvilla.com（Studio 版）を実測した値に合わせた（2026-11-07）
+   ・「v3-」で始まる部品はトップ用。動きは assets/js/v3.js
+   ========================================================= */
+
+/* 明朝は Zen オールド明朝（2026-11-07 mashuさん決定）。Bodoni Moda は紹介文の英字の見出し */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Zen+Old+Mincho:wght@400;500&display=swap');
+
+/* ---------- 書体と色 ---------- */
+body.v3{
+  --f-mincho:'Zen Old Mincho', serif;   /* 日本語の見出し・縦書き */
+  --f-title:'Jost', sans-serif;          /* 英字の見出し（ubaku.jp と同じ Jost の細字。2026-11-07 mashuさん） */
+  --f-heading:'Murecho', 'Noto Sans JP', sans-serif;   /* 日本語のページ題・文章ページの見出し（ubaku.jp と同じ） */
+  --f-en:'Jost', sans-serif;             /* 小さな英字・数字・英文（今のサイトの英文、ubaku.jp とも同じ） */
+  --f-en-sub:'Jost', sans-serif;
+  /* メニューの英字：今のサイトの指定をそのまま写す（最後に sans-serif を足さない。足すと Windows の見え方が変わる） */
+  --f-nav:'ヒラギノ角ゴシック', 'Hiragino Sans';
+  --gold:#B9975B;        /* 金：線・数字・ボタン（試作の左下の札で選べる） */
+  --gold-ink:#8C6E3C;    /* 白・生成りの上の小さな金の文字 */
+  --gold-light:#CDB27A;  /* 緑の上の金の文字 */
+  --hill-h:clamp(30px, 4.6vw, 72px);   /* 丘の高さ（冒頭とフッターの2か所だけ） */
+}
+/* メニュー：今のサイトと同じ 14px・細字（200）・字間 .05em */
+body.v3 .global-nav,body.v3 .drawer-nav{font-family:var(--f-nav);font-weight:200;font-size:14px;letter-spacing:.05em}
+body.v3 .global-nav .reserve-btn,body.v3 .lang-btn{font-family:var(--f-nav);font-weight:200;font-size:14px;letter-spacing:.05em}
+/* 英字の見出し：ubaku.jp と同じ Jost の細字・字間 .05em（大きさは小さめのまま） */
+body.v3 .en-title,.v3-title{font-family:var(--f-title);font-weight:200;font-size:clamp(30px,3vw,38px);letter-spacing:.05em;line-height:1.2}
+body.v3 .block-title{font-family:var(--f-title);font-weight:200;font-size:clamp(24px,2.2vw,28px);letter-spacing:.05em}
+/* 文章ページの見出し：ubaku.jp と同じ Murecho */
+body.v3 .doc h2,body.v3 .article h1,body.v3 .prose h2,body.v3 .news-cards h2{font-family:var(--f-heading)}
+/* FAQ などの冒頭の日本語は、Room・Explore の冒頭の文と同じ見た目にする */
+body.v3 .page-head-ja{font-family:var(--f-body);font-weight:300;font-size:14px;line-height:2.2;letter-spacing:.04em}
+
+/* ---------- ① ヒーロー（文字を少し下に。18% → 14%） ---------- */
+body.v3 .hero-copy{bottom:14%}
+/* 今のサイトの実測値をもとに（見出しは 2px 大きく）：見出し 22px・字間 .2em、下の文 11px・字間 .3em、行のあいだ 20px。
+   字間は文字の右に付くので、同じ幅を左にも足して見た目の真ん中にそろえる */
+body.v3 .hero-copy h1{font-size:22px;line-height:1.1;letter-spacing:.2em;padding-left:.2em}
+body.v3 .hero-copy p{font-size:11px;line-height:1.1;letter-spacing:.3em;padding-left:.3em;margin-top:20px}
+body.v3 .hero-top{background:var(--green)}   /* 写真が出るまでの色 */
+/* 下層ページの写真も、開いたときにゆっくり引く */
+body.v3 .hero:not(.hero-top) img{animation:v3-pull 7s var(--ease) both}
+@keyframes v3-pull{from{transform:scale(1.08)}to{transform:none}}
+
+/* ---------- ② はじめの紹介（今のサイトの実測値。左右の高さは v3.js がそろえる） ---------- */
+body.v3 .intro .wrap{grid-template-columns:auto minmax(0, 440px);justify-content:center;gap:clamp(128px, 17vw, 256px);align-items:start}
+body.v3 .intro-ja{height:400px;justify-self:auto;font-size:14px;line-height:2;letter-spacing:0}
+body.v3 .intro-ja h2{font-size:20px;line-height:1.4;letter-spacing:.04em;margin-left:1.6em;text-align:justify;text-align-last:justify;text-justify:inter-character}   /* 見出しも本文と同じ高さに、上下をそろえる */
+body.v3 .intro-ja p{margin:0}
+body.v3 .intro-en h2{font-family:'Bodoni Moda', serif;font-weight:600;font-size:18px;line-height:1.4;letter-spacing:.02em;margin-bottom:24px}
+body.v3 .intro-en p{font-family:'Jost', sans-serif;font-weight:300;font-size:14px;line-height:1.7;letter-spacing:.05em;text-align:start;margin:0}
+
+/* ---------- 共通の部品 ---------- */
+.v3-sec{padding:var(--sec-y) 0}
+.v3-title{color:var(--green);margin:0 0 20px}
+.v3-catch{font-family:var(--f-mincho);font-size:clamp(19px,1.9vw,24px);line-height:1.9;letter-spacing:.1em;color:var(--ink);margin-bottom:24px}
+.v3-head{max-width:880px;margin-bottom:clamp(40px,5vw,64px)}
+.v3-head p{font-size:14px;line-height:2;letter-spacing:.04em;margin:0}   /* ubaku.jp の本文と同じ（Noto Sans JP 細字 14px） */
+.v3-head-row{max-width:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.v3-head-row .v3-title{margin:0}
+.v3-head-links{display:flex;gap:28px}
+.v3-center{text-align:center;margin-top:clamp(40px,5vw,64px)}
+
+/* 写真は、ふわっと現れて少し引いていく（下からの幕はやめた。2026-11-07） */
+.v3-unveil{opacity:0;transition:opacity 1.4s ease var(--d,0s)}
+.v3-unveil img{transform:scale(1.07);transition:transform 2.6s var(--ease) var(--d,0s)}
+.v3-unveil.is-visible{opacity:1}
+.v3-unveil.is-visible img{transform:none}
+@media (hover:hover){
+  .v3-unveil.is-visible.zoom:hover img,a:hover .v3-unveil.is-visible.zoom img{transform:scale(1.05);transition:transform var(--zoom-time) var(--ease)}
+}
+
+/* 残り時間の金の線（Seasons・Explore 共通。長さは --t） */
+.v3-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:0 50%}
+.is-on > .v3-bar,.is-on > a > .v3-bar{animation:v3-bar var(--t,5s) linear both}
+.is-held > .v3-bar,.is-held > a > .v3-bar{animation-play-state:paused}
+@keyframes v3-bar{to{transform:scaleX(1)}}
+
+/* 写真が溶けるように替わり、その間ゆっくり引く（Concept・Explore 共通） */
+.v3-wipe{position:relative;overflow:hidden;background:var(--paper)}
+.v3-wipe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:none}
+.v3-wipe img.is-active{opacity:1;z-index:2;transition:opacity 1.8s ease}
+.v3-wipe img.was-active{opacity:1;z-index:1}
+.v3-wipe img.is-active,.v3-wipe img.was-active{animation:v3-kb 11s linear both}
+@keyframes v3-kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+
+/* ---------- 丘の区切り（v3.js が色の違うセクションの間に入れる） ---------- */
+.hill{display:block;height:var(--hill-h);margin-top:-1px;position:relative;z-index:1}
+.hill-over{position:absolute;left:0;right:0;height:var(--hill-h);margin:0;z-index:3;pointer-events:none}
+.hill-over.at-top{top:-1px}
+.hill-over.at-bottom{bottom:-1px}
+.hill svg{display:block;width:100%;height:100%;overflow:visible}
+.hill .ln{fill:none;stroke:var(--gold);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.8}
+/* 金の線は、画面に入ると左から引かれる */
+.hill .ln-wrap{clip-path:inset(-10px 100% -10px 0);transition:clip-path 2.4s var(--ease)}
+.hill.is-visible .ln-wrap{clip-path:inset(-10px 0 -10px 0)}
+
+/* ---------- ③ Concept ---------- */
+.v3-concept{background:var(--cream)}
+.v3-split{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.v3-split .v3-wipe{aspect-ratio:3 / 2}
+.v3-text p:not(.v3-catch){font-size:14px;line-height:2}
+/* 3つの特長：線が引かれ、絵が線で描かれ、文字が順に現れる */
+.v3-points{list-style:none;margin:clamp(64px,8vw,112px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}
+.v3-points li{position:relative;padding-top:28px;--i:0s}
+.v3-points li:nth-child(2){--i:.22s}
+.v3-points li:nth-child(3){--i:.44s}
+.v3-points li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(41,70,61,.2)}
+.v3-points li::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.5s var(--ease) var(--i)}
+.v3-points li.is-visible::after{transform:scaleX(1)}
+.v3-pt-icon{display:block;width:56px;height:56px;margin-bottom:18px}
+.v3-pt-icon path{fill:none;stroke:var(--green);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.2s var(--ease) calc(var(--i) + .3s)}
+.v3-points li.is-visible .v3-pt-icon path{stroke-dashoffset:0}
+.v3-points .no,.v3-points h3,.v3-points p{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s var(--ease)}
+.v3-points .no{transition-delay:calc(var(--i) + .5s)}
+.v3-points h3{transition-delay:calc(var(--i) + .65s)}
+.v3-points p{transition-delay:calc(var(--i) + .8s)}
+.v3-points li.is-visible .no,.v3-points li.is-visible h3,.v3-points li.is-visible p{opacity:1;transform:none}
+.v3-points .no{display:block;font-family:var(--f-en);font-weight:300;font-size:14px;color:var(--gold-ink);letter-spacing:.1em}
+.v3-points h3{font-family:var(--f-mincho);font-size:18px;letter-spacing:.14em;margin:6px 0 12px;color:var(--ink)}
+.v3-points p{font-size:13.5px;line-height:2.1;margin:0}
+
+/* ---------- ④ Story（全面の写真に文字） ---------- */
+.v3-story{position:relative;min-height:min(96vh,860px);display:flex;align-items:center;color:var(--white);overflow:hidden;background:var(--deep,#1F372F)}
+.v3-story-photo{position:absolute;inset:0}
+.v3-story-photo img{width:100%;height:120%;object-fit:cover;transform:translateY(var(--py,0px));will-change:transform}
+.v3-story::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,28,24,.72),rgba(18,28,24,.35) 55%,rgba(18,28,24,.1))}
+/* 余白は wrap に持たせる（文字の箱に持たせると、文字が画面に入る前にふわっと出終わってしまう） */
+.v3-story .wrap{position:relative;z-index:1;width:100%;padding-top:clamp(120px,14vw,180px);padding-bottom:clamp(120px,14vw,180px)}
+.v3-story-text{max-width:540px}
+.v3-story .v3-title{color:var(--gold-light)}
+.v3-story .v3-catch{color:var(--white)}
+.v3-story-text p:not(.v3-catch){font-size:14px;line-height:2.2;color:rgba(255,255,255,.88)}
+.v3-story .more{color:var(--gold-light)}
+.v3-link{margin-top:28px}
+
+/* ---------- ⑤ Room（緑の帯・ゆっくり流れ続ける写真） ---------- */
+.v3-room{background:var(--green);color:var(--on-green);overflow:hidden}
+.v3-room .v3-title{color:var(--on-green)}
+.v3-room .v3-head p{color:var(--on-green-sub)}
+.v3-carousel{position:relative;overflow:hidden}
+.v3-track{list-style:none;margin:0;padding:0;display:flex;width:max-content;cursor:grab;touch-action:pan-y;will-change:transform;user-select:none}
+.v3-track.is-drag{cursor:grabbing}
+.v3-track li{flex:0 0 clamp(260px,30vw,440px);margin-right:6px}
+.v3-track figure{margin:0;position:relative}
+.v3-track .ph{overflow:hidden}
+.v3-track img{width:100%;aspect-ratio:3 / 2;object-fit:cover;pointer-events:none;transition:transform var(--zoom-time) var(--ease)}
+.v3-track li:hover img{transform:scale(1.05)}
+.v3-track figcaption{display:flex;align-items:baseline;gap:12px;padding-top:12px;font-family:var(--f-mincho);font-size:13px;color:var(--on-green-sub)}
+.v3-track figcaption b{font-family:var(--f-en);font-weight:300;font-size:14px;color:var(--gold-light);letter-spacing:.06em}
+.v3-arrow{position:absolute;top:calc(50% - 22px);width:48px;height:48px;border-radius:50%;border:1px solid rgba(241,235,223,.6);background:rgba(18,28,24,.25);color:#fff;cursor:pointer;transform:translateY(-50%);transition:background .3s,border-color .3s}
+.v3-arrow::before{content:"";position:absolute;inset:0;margin:auto;width:10px;height:10px;border-top:1px solid currentColor;border-right:1px solid currentColor}
+.v3-arrow.prev{left:calc(var(--pad-x) + 12px)}
+.v3-arrow.prev::before{transform:translateX(2px) rotate(-135deg)}
+.v3-arrow.next{right:calc(var(--pad-x) + 12px)}
+.v3-arrow.next::before{transform:translateX(-2px) rotate(45deg)}
+.v3-arrow:hover{background:var(--gold);border-color:var(--gold)}
+.v3-beds{list-style:none;margin:clamp(48px,6vw,72px) auto 0;padding:0;max-width:880px;display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+.v3-beds li{display:flex;align-items:baseline;gap:14px;padding:14px 0;border-bottom:1px solid rgba(241,235,223,.16);font-family:var(--f-mincho);font-size:14px;letter-spacing:.06em}
+.v3-beds .bn{font-family:var(--f-en);font-weight:300;font-size:15px;letter-spacing:.06em}
+.v3-beds .fl{font-family:var(--f-en);font-weight:300;font-size:13px;color:var(--gold-light);width:24px}
+.v3-beds .d{font-family:var(--f-body);font-size:12.5px;color:var(--on-green-sub);margin-left:auto}
+.v3-beds .p{font-family:var(--f-en);font-weight:300;font-size:16px;color:var(--gold-light);min-width:44px;text-align:right}
+.v3-room .more{color:var(--on-green)}
+
+/* ---------- ⑥ Numbers（ubaku.jp と同じ数字。部屋を見たあとの「信頼の裏づけ」） ---------- */
+.v3-numbers{background:var(--white);padding:clamp(72px,8vw,120px) 0}
+.v3-num-row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr)}
+.v3-num-row li{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:8px 10px;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s var(--ease)}
+.v3-num-row li.is-visible{opacity:1;transform:none}
+.v3-num-row li + li{border-left:1px solid var(--line)}
+.v3-num-row .num{font-family:var(--f-en);font-weight:200;font-size:clamp(30px,3.2vw,42px);line-height:1.1;color:var(--green);white-space:nowrap}
+.v3-num-row .num b{display:inline-block;font-weight:200;font-variant-numeric:tabular-nums}
+.v3-num-row .num small{font-family:var(--f-en);font-weight:300;font-size:.42em;margin-left:2px}
+.v3-num-row .num small.ja{font-family:var(--f-mincho)}
+.v3-num-row .lbl{font-size:12px;letter-spacing:.06em;color:var(--sub);line-height:1.7}
+.v3-num-note{font-size:11px;color:var(--sub);text-align:center;margin:24px 0 0}
+
+/* ---------- ⑦ Seasons（順に開いていく4枚。今の季節から始まる） ---------- */
+.v3-seasons-sec{background:var(--cream)}
+.v3-seasons{list-style:none;margin:0;padding:0;display:flex;gap:6px;height:clamp(440px,46vw,620px)}
+.v3-season{position:relative;flex:1 1 0;min-width:0;overflow:hidden;transition:flex-grow 1.2s var(--ease),clip-path 1.6s var(--ease) var(--d,0s);cursor:pointer;background:var(--green)}
+.v3-season.is-on{flex-grow:2.8}
+.v3-season img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v3-season::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(18,28,24,0) 45%,rgba(18,28,24,.62))}
+.v3-season.is-visible.is-on img{transform:scale(1.06);transition:transform 7s linear}
+.v3-season:nth-child(4) img{object-position:68% 50%}   /* 細いときも一本の木が入るように */
+.v3-season .cap{position:absolute;left:clamp(14px,1.8vw,24px);bottom:clamp(16px,2vw,28px);z-index:2;color:#fff;width:min(340px,calc(100% - 28px))}
+.v3-season h3{font-family:var(--f-mincho);font-size:19px;letter-spacing:.14em;color:#fff;margin:0;line-height:1.5;white-space:nowrap}
+.v3-season h3 span{font-family:var(--f-en);font-weight:300;font-size:12px;letter-spacing:.08em;margin-left:12px}
+.v3-season h3 .m{margin-left:0;opacity:0;transition:opacity .6s ease}
+.v3-season h3 .m::before{content:'｜'}
+.v3-season .cap p{width:min(340px,70vw);font-size:13px;line-height:2;margin:6px 0 0;color:rgba(255,255,255,.92);max-height:0;opacity:0;overflow:hidden;transition:opacity .5s ease,max-height .5s ease}
+.v3-season.is-on h3 .m{opacity:1}
+.v3-season.is-on .cap p{max-height:120px;opacity:1;transition:opacity .9s ease .5s,max-height .5s ease .3s}
+.v3-season .v3-bar{z-index:3}
+
+/* 写真の上の名前：右下の隅に小さく。明るい写真でも読めるよう、文字のまわりだけ薄い影を付ける */
+body.v3 .photos .photo figcaption{left:auto;right:8px;bottom:5px;font-size:11px;text-shadow:0 0 6px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.35)}
+
+/* ---------- ⑧ Explore（宿からの近さの一覧。行に合わせて写真が替わる） ---------- */
+.v3-explore-sec{background:var(--white)}
+.v3-explore{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:stretch}
+.v3-explore .v3-wipe{aspect-ratio:3 / 2;width:100%;align-self:center}
+/* 右の一覧の高さを、左の写真の高さにそろえる（行を均等に伸ばす） */
+.v3-explore > div:last-child{display:flex;flex-direction:column}
+.v3-ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;flex:1}
+.v3-ex-list li{flex:1;display:flex;border-top:1px solid var(--line)}
+.v3-ex-list li:last-child{border-bottom:1px solid var(--line)}
+.v3-ex-list a{position:relative;display:flex;align-items:center;justify-content:space-between;flex:1;gap:16px;padding:9px 4px;transition:padding .5s var(--ease)}
+.v3-ex-list .nm{font-family:var(--f-mincho);font-size:16px;letter-spacing:.1em;color:var(--ink);line-height:1.5;transition:color .4s}
+.v3-ex-list .nm small{display:block;font-family:var(--f-en);font-weight:300;font-size:11.5px;letter-spacing:.06em;color:var(--sub)}
+.v3-ex-list .tm{font-size:12px;color:var(--sub);white-space:nowrap;letter-spacing:.04em}
+.v3-ex-list .tm b{font-family:var(--f-en);font-weight:200;font-size:20px;color:var(--green);margin:0 3px;line-height:1;transition:color .4s}
+.v3-ex-list .v3-bar{bottom:-1px;height:1px}
+.v3-ex-list li.is-on a{padding-left:14px}
+.v3-ex-list li.is-on .nm{color:var(--green)}
+.v3-ex-list li.is-on .tm b{color:var(--gold-ink)}
+.v3-ex-note{font-size:12px;color:var(--sub);margin:10px 0 0}
+/* 施設の種類を示す小さな札（きとろんの「日帰り温浴施設」） */
+.v3-tag{display:inline-block;margin-left:8px;padding:2px 8px;background:var(--gold-ink);border-radius:2px;font-family:'Noto Sans JP',sans-serif;font-style:normal;font-weight:400;font-size:10px;line-height:1.5;letter-spacing:.06em;color:#fff;vertical-align:2px;white-space:nowrap}
+
+/* 幅が足りず札が次の行に落ちるときも、名前の左にそろえる */
+.v3-ex-list .nm{display:flex;flex-wrap:wrap;align-items:center;column-gap:8px}
+.v3-ex-list .nm small{flex-basis:100%}
+.v3-ex-list .nm .v3-tag{margin-left:0}
+
+/* 所要時間の一覧の見出し（交通拠点など）。真鍮に決定（2026-11-07 mashuさん） */
+.times-box{--acc:var(--gold-ink);--acc-line:var(--gold)}
+.times-cat{position:relative;margin-top:32px;padding-left:13px;font-family:'Murecho',sans-serif;font-weight:500;font-size:14px;line-height:1.4;letter-spacing:.14em;color:var(--acc)}
+.times-cat::before{content:"";position:absolute;left:0;top:.15em;bottom:.15em;width:2px;background:var(--acc-line)}
+
+/* ---------- ⑨ News ---------- */
+.v3-news{background:var(--cream)}
+.v3-news .news-lines{max-width:none}
+.v3-news .news-lines li:first-child{border-top:1px solid rgba(41,70,61,.15)}
+.v3-news .news-lines time{font-family:var(--f-en);font-weight:300;font-size:14px}
+.v3-news .news-lines .t{font-family:var(--f-body);font-weight:300}
+.v3-news .news-lines.reveal{opacity:1;transform:none}
+.v3-news .news-lines li{opacity:0;transform:translateY(16px);transition:opacity .9s ease,transform .9s var(--ease)}
+.v3-news .news-lines li:nth-child(2){transition-delay:.14s}
+.v3-news .news-lines li:nth-child(3){transition-delay:.28s}
+.v3-news .news-lines.is-visible li{opacity:1;transform:none}
+
+/* ニュースの一覧ページ：最初は5件。Load More で5件ずつ足す */
+.v3-load{text-align:center;margin-top:clamp(40px,5vw,56px)}
+.v3-load button{font-family:var(--f-en);font-weight:300;font-size:14px;letter-spacing:.1em;color:var(--green);background:none;border:1px solid var(--green);padding:12px 44px;cursor:pointer;transition:background-color .4s ease,color .4s ease,border-color .4s ease}
+.v3-load button:hover{background:var(--green);color:#fff}
+
+/* ---------- 予約の帯：写真の上に置いて、フッターと別の場所にする ---------- */
+body.v3 .cta{position:relative;background:#22332D url(/assets/img/cta-oka.webp) 50% 86% / cover no-repeat;padding:clamp(88px,10vw,140px) 0 calc(var(--hill-h) + clamp(88px,10vw,140px))}
+body.v3 .cta::before{content:"";position:absolute;inset:0;background:rgba(18,28,24,.42)}
+body.v3 .cta .wrap{position:relative;z-index:1}
+body.v3 .cta-lead{font-family:var(--f-mincho);color:#fff;font-size:clamp(19px,calc(1.5vw + 2px),22px);letter-spacing:.14em;padding-left:.14em;margin-bottom:12px}
+body.v3 .cta-sub{color:rgba(255,255,255,.9)}
+/* 「最もお得」は行を分けて、明るい金で静かに目立たせる */
+body.v3 .cta-best{display:block;margin-top:4px;font-size:15px;font-weight:400;letter-spacing:.1em;color:#E3CC97}
+/* ボタンは全体を約10%小さく（文字・余白とも） */
+body.v3 .cta-btn{border-color:var(--gold-light);color:#fff;font-size:13.5px;padding:12.5px clamp(29px,4.5vw,58px)}
+body.v3 .cta-btn small{font-size:10px}
+body.v3 .cta-btn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* ---------- 右下の印：真鍮の丸い印（文字の輪がゆっくり回る）と、白い丸の UBAKU Letter。v3.js が入れる ---------- */
+.v3-fab{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;align-items:flex-end;gap:10px;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .5s ease,transform .6s var(--ease)}
+.v3-fab.is-shown{opacity:1;transform:none;pointer-events:auto}
+.v3-seal{position:relative;display:flex;align-items:center;justify-content:center;border-radius:50%;box-shadow:0 8px 22px rgba(20,30,26,.22);transition:transform .6s var(--ease),box-shadow .4s ease}
+.v3-seal:hover{transform:scale(1.05)}
+.v3-seal-go{width:108px;height:108px;background:linear-gradient(150deg,#C2A266,#A28148 55%,#8C6E3C);color:#fff}
+.v3-seal-go svg{position:absolute;inset:0;width:100%;height:100%;animation:v3-spin 26s linear infinite}
+.v3-seal-go text{font-family:var(--f-en);font-weight:300;font-size:8.6px;fill:#fff}
+.v3-seal-go b{font-family:var(--f-body);font-weight:400;font-size:13px;line-height:1.5;letter-spacing:.16em;padding-left:.16em;text-align:center}
+@keyframes v3-spin{to{transform:rotate(360deg)}}
+.v3-seal-letter{flex-direction:column;gap:5px;width:76px;height:76px;background:#FBFAF5;--logo-color:var(--green);--logo-bar:#23A0DA}
+.v3-seal-letter .wordmark{width:50px}
+/* 一番上へ戻るボタン：真鍮の印の真上に並べる */
+.v3-top{position:fixed;right:54px;bottom:140px;z-index:40;width:40px;height:40px;padding:0;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:#FBFAF5;color:var(--green);box-shadow:0 6px 16px rgba(20,30,26,.18);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s ease,bottom .5s var(--ease),right .5s var(--ease),background-color .3s ease,color .3s ease}
+.v3-top.is-shown{opacity:1;pointer-events:auto}
+.v3-top.is-low{right:20px;bottom:20px}
+.v3-top:hover{background:var(--gold);color:#fff}
+.v3-top svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+/* マウスを乗せると、Letter の説明が左に出る */
+.v3-seal-tip{position:absolute;right:calc(100% + 10px);top:50%;padding:7px 14px;border-radius:999px;background:#FBFAF5;color:var(--green);font-size:12px;letter-spacing:.06em;white-space:nowrap;box-shadow:0 6px 16px rgba(20,30,26,.16);opacity:0;transform:translate(6px,-50%);pointer-events:none;transition:opacity .35s ease,transform .45s var(--ease)}
+.v3-seal-letter:hover .v3-seal-tip{opacity:1;transform:translate(0,-50%)}
+/* Letter に触れると、東川青の輪と点が灯る */
+.v3-seal-letter:hover{box-shadow:0 0 0 1.5px #23A0DA,0 8px 22px rgba(35,160,218,.3)}
+.v3-seal-letter:hover em{color:#23A0DA}
+.v3-seal-tip::before{content:"";display:inline-block;width:6px;height:6px;margin-right:8px;border-radius:50%;background:#23A0DA;vertical-align:.12em}
+.v3-seal-letter em{font-family:var(--f-en);font-style:normal;font-weight:300;font-size:11px;line-height:1;letter-spacing:.14em;padding-left:.14em;color:var(--green);transition:color .4s ease}
+
+/* ---------- 予約のページ：大きさは 一文 20 / 見出し 16 / 本文 14 / 英文 13 / 注記 12 にそろえる ---------- */
+.rs-best{text-align:center;padding:clamp(22px,3vw,30px) 0;margin-bottom:clamp(24px,3vw,32px);border-top:1px solid rgba(185,151,91,.55);border-bottom:1px solid rgba(185,151,91,.55)}
+.rs-best p{margin:0}
+.rs-best .ja{font-family:var(--f-mincho);font-weight:500;font-size:clamp(18px,1.8vw,21px);letter-spacing:.1em;padding-left:.1em;color:var(--green)}
+body.v3 .doc .rs-best .en{font-family:var(--f-en);font-weight:300;font-size:14px;letter-spacing:.1em;padding-left:.1em;color:var(--gold-ink);margin-top:6px}
+body.v3 .doc .en{font-size:13px;line-height:1.9;color:var(--sub)}
+body.v3 .before-book h2{font-family:var(--f-heading);font-weight:400;font-size:16px;letter-spacing:.06em}
+body.v3 .before-book ul{font-size:14px}
+body.v3 .before-book .en li{font-size:13px}
+body.v3 .before-book p:last-child{margin-bottom:0}
+body.v3 .small-note{font-size:12px;line-height:1.9}
+body.v3 .book .btn{font-size:14px}
+
+/* ---------- Room のページ（写真の大きさと位置に変化をつける） ---------- */
+.band-white{background:var(--white)}
+.rm-sec{padding:var(--sec-y) 0;overflow:hidden}
+.rm-title{margin-bottom:24px}
+.rm-title .block-ja{display:block;font-family:var(--f-body);font-size:12px;letter-spacing:.14em;color:var(--gold-ink);margin-bottom:6px}
+.rm-title .block-title{margin:0;color:var(--green)}
+.rm-sec p{font-size:14px;line-height:2}
+.rm-photo{margin:0;overflow:hidden;background:var(--paper)}
+.rm-photo img{width:100%;height:100%;object-fit:cover}
+/* リビング：大きな1枚に、文章の面と小さな1枚が重なる */
+.rm-feature{position:relative;display:grid;grid-template-columns:repeat(12,1fr);align-items:end}
+.rm-feature .rm-big{grid-column:1 / 11;grid-row:1;aspect-ratio:3 / 2}
+.rm-feature .rm-card{grid-column:7 / 13;grid-row:1;align-self:end;background:var(--white);padding:clamp(28px,3.4vw,48px);margin-bottom:clamp(-190px,-12vw,-64px);position:relative;left:clamp(24px,5vw,96px);z-index:2}
+.rm-sub{display:grid;grid-template-columns:repeat(12,1fr);margin-top:clamp(32px,4vw,56px)}
+.rm-sub .rm-photo{grid-column:2 / 6;aspect-ratio:3 / 2}
+/* キッチン：文章と小さな写真を左に、大きな写真を右に */
+.rm-duo{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,80px);align-items:center}
+.rm-duo.flip{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.rm-duo .rm-tall{aspect-ratio:3 / 2}
+.rm-duo .rm-small{aspect-ratio:3 / 2;width:72%;margin-top:clamp(28px,3vw,44px)}
+/* 寝室：緑の面はここだけ */
+.rm-green{background:var(--green);color:var(--on-green)}
+.rm-green .block-title{color:var(--on-green)}
+.rm-green .block-ja{color:var(--gold-light)}
+.rm-green p{color:var(--on-green-sub)}
+.rm-green .rm-lead{max-width:720px;margin-bottom:clamp(32px,4vw,48px)}
+.rm-note{font-size:13px !important;margin-top:18px;text-align:center}
+/* 洗面・浴室：大きさの違う3枚 */
+.rm-mosaic{display:grid;grid-template-columns:minmax(0,9fr) repeat(3,minmax(0,4fr));gap:8px;margin-top:clamp(20px,2.4vw,32px)}   /* 横長1枚と縦長3枚の高さが、切らずにそろう幅 */
+.rm-mosaic .rm-photo{aspect-ratio:2 / 3}
+.rm-mosaic .rm-photo:first-child{aspect-ratio:3 / 2}
+/* 遊びと本 */
+.rm-play{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:clamp(32px,4vw,56px)}   /* 画面の端まで使う4枚の正方形 */
+.rm-play .rm-photo{aspect-ratio:1 / 1}
+/* 道具：小さな写真がゆっくり流れる */
+.rm-tools{margin-top:clamp(32px,4vw,56px)}
+.rm-tools .v3-track li{flex-basis:clamp(170px,17vw,240px)}
+.rm-tools .v3-track img{aspect-ratio:1 / 1}
+.rm-tools .v3-track figcaption{color:var(--sub);font-family:var(--f-en);font-weight:300;font-size:12px;letter-spacing:.06em;padding-top:8px}
+.rm-amenity{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center}
+.rm-icons{margin:0}
+.rm-icons img{width:100%;height:auto}
+body.v3 .rm-amenity .amenity-list{margin-top:0;color:var(--text)}
+body.v3 .rm-sec .house-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:clamp(32px,4vw,48px);padding-top:clamp(20px,2.4vw,28px);border-top:1px solid var(--line);color:var(--text);line-height:1.9}
+body.v3 .rm-sec .house-notes strong{display:block;color:var(--green)}
+/* 敷地図と間取り図：切り替えで1枚ずつ */
+.rm-tabs{display:flex;gap:8px;margin-bottom:20px}
+.rm-tabs button{font-family:var(--f-body);font-weight:300;font-size:13px;letter-spacing:.08em;background:none;border:1px solid var(--line);padding:8px 22px;border-radius:999px;color:var(--text);cursor:pointer;transition:background-color .4s ease,color .4s ease,border-color .4s ease}
+.rm-tabs button[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.rm-plan{display:none;margin:0}
+.rm-plan.is-on{display:block;animation:v3-fade .8s ease both}
+.rm-plan a{display:block;cursor:zoom-in}
+.rm-plan img{width:100%;height:auto}
+@keyframes v3-fade{from{opacity:0}to{opacity:1}}
+
+/* ---------- タブレット ---------- */
+@media (max-width:900px){
+  .v3-split,.v3-explore,.rm-duo,.rm-duo.flip,.rm-amenity{grid-template-columns:minmax(0,1fr)}
+  .rm-duo.flip > :first-child{order:2}
+  .rm-play{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rm-feature .rm-big{grid-column:1 / -1}
+  .rm-feature .rm-card{grid-column:1 / -1;grid-row:2;margin:0;left:0}
+  body.v3 .rm-sec .house-notes{grid-template-columns:minmax(0,1fr)}
+  .rm-sub .rm-photo{grid-column:1 / 9}
+  .v3-points{grid-template-columns:1fr}
+  .v3-num-row{grid-template-columns:repeat(3,1fr);row-gap:32px}
+  .v3-num-row li:nth-child(4){border-left:none}
+  .v3-beds{grid-template-columns:1fr}
+  .v3-arrow{display:none}
+}
+
+/* ---------- スマホ ---------- */
+@media (max-width:760px){
+  body.v3 .intro .wrap{grid-template-columns:1fr}
+  body.v3 .intro-ja{height:auto !important}
+  body.v3 .intro-ja h2{margin:0 0 20px}
+  .v3-seasons{flex-direction:column;height:680px}
+  .v3-season.is-on{flex-grow:3.4}
+  .v3-season .cap{width:calc(100% - 28px)}
+  .v3-season .cap p{width:auto}
+  /* 右下の印はスマホでは少し小さく */
+  .v3-fab{right:12px;bottom:calc(12px + env(safe-area-inset-bottom));gap:8px}
+  .v3-seal-go{width:88px;height:88px}
+  .v3-top{right:36px;bottom:calc(110px + env(safe-area-inset-bottom))}
+  .v3-top.is-low{right:12px;bottom:calc(12px + env(safe-area-inset-bottom))}
+  .v3-seal-go b{font-size:12px}
+  .v3-seal-letter{width:64px;height:64px}
+  .v3-seal-letter .wordmark{width:42px}
+  .v3-seal-letter em{font-size:10px}
+  .v3-mosaic-x{display:none}
+  .rm-mosaic{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rm-note{text-align:justify}
+  .rm-mosaic .rm-photo:first-child{grid-column:1 / -1}
+}
+@media (max-width:600px){
+  .v3-num-row{grid-template-columns:repeat(2,1fr)}
+  .v3-num-row li{border-left:none !important}
+  .v3-track li{flex-basis:78vw}
+  .v3-story{min-height:auto}
+  .v3-story::after{background:rgba(18,28,24,.6)}
+  .v3-head-row{flex-wrap:wrap}
+  .v3-beds li{flex-wrap:wrap;gap:4px 12px;white-space:nowrap}
+  .v3-beds .d{order:3;flex-basis:100%;margin-left:38px}
+  .v3-beds .p{margin-left:auto}
+}
+
+/* 「動きを減らす」設定の人には、最初から見せる */
+@media (prefers-reduced-motion: reduce){
+  .v3-unveil,.v3-unveil img{opacity:1;transform:none;transition:none}
+  .v3-story-photo img,body.v3 .hero img{transform:none;animation:none}
+  .v3-wipe img.is-active,.v3-wipe img.was-active{animation:none;transition:none}
+  .v3-bar{display:none}
+  .v3-seal-go svg{animation:none}
+  .v3-points li::after,.v3-pt-icon path,.v3-points .no,.v3-points h3,.v3-points p,.v3-news .news-lines li{transition:none}
+  .hill .ln-wrap{clip-path:none;transition:none}
+}
+
+/* ---------- 英語のページ（2026-11-07） ----------
+   明朝・Murecho は日本語の書体なので、英語では見出しも本文も Jost にする */
+html[lang="en"] body.v3{--f-mincho:'Jost','Noto Sans JP',sans-serif;--f-heading:'Jost','Noto Sans JP',sans-serif;--f-body:'Jost','Noto Sans JP',sans-serif;--f-title:'Jost','Noto Sans JP',sans-serif;--f-en:'Jost','Noto Sans JP',sans-serif;--f-en-sub:'Jost','Noto Sans JP',sans-serif;font-family:var(--f-body)}
+html[lang="en"] body.v3 .intro-en h2{font-family:'Bodoni Moda','Zen Old Mincho',serif}
+/* 英文の中の宇莫別荘：漢字は大きく見えるので少し小さく。Bodoni の見出しでは明朝にして太さをそろえる */
+html[lang="en"] .jn{font-family:'Noto Sans JP',sans-serif;font-weight:300;font-size:.9em;letter-spacing:.04em}
+html[lang="en"] body.v3 .intro-en h2 .jn{font-family:'Zen Old Mincho',serif;font-weight:500;font-size:.96em;letter-spacing:.02em}
+html[lang="en"] body.v3 .intro-en p{font-family:var(--f-body)}
+html:not([lang="ja"]) body.v3 .intro-en p + p{margin-top:16px}
+html:not([lang="ja"]) body.v3 .intro .wrap{display:block;max-width:1040px}
+html:not([lang="ja"]) body.v3 .intro-en h2{text-align:center}
+/* Room の見出し（英語版だけ）：番号は自動で振る */
+html[lang="en"] main{counter-reset:rm}
+html[lang="en"] .rm-title{counter-increment:rm;display:flex;align-items:baseline;gap:.5em;font-size:clamp(28px,3vw,38px)}
+html[lang="en"] .rm-title::before{content:counter(rm,decimal-leading-zero);font-family:'Jost',sans-serif;font-weight:200;font-size:inherit;line-height:1.3;letter-spacing:.02em;color:var(--gold-ink)}
+html[lang="en"] .rm-green .rm-title::before{color:var(--gold-light)}
+html[lang="en"] body.v3 .rm-title .block-title{font-size:inherit;line-height:1.3}
+html:not([lang="ja"]) .v3-catch{font-weight:300;line-height:1.5}
+html:not([lang="ja"]) body.v3 .hero-copy h1{font-weight:300;letter-spacing:.14em;padding-left:.14em}
+html:not([lang="ja"]) .v3-num-row .num small{font-size:12px;letter-spacing:.02em;margin-left:5px}
+html[lang="en"] .v3-seal-go b{font-family:var(--f-en);letter-spacing:.08em}
+html[lang="en"] .v3-ex-list .nm{letter-spacing:.03em}
+html[lang="en"] .v3-ex-list .nm small{font-family:'Noto Sans JP',sans-serif}
+
+/* ---------- 韓国語・繁体字のページ（2026-11-07） ----------
+   Jost や Murecho には韓国語・繁体字の字がなく、そのままだと途中で別の書体に替わるので、
+   すべての書体の指定にその言語の書体を足す。かな（固有名詞）と「荘」は Noto Sans JP で出す */
+html[lang="ko"] body.v3{--cjk:'Noto Sans KR','Noto Sans JP',sans-serif}
+html[lang="zh-Hant"] body.v3{--cjk:'Noto Sans TC','Noto Sans JP',sans-serif}
+html[lang="ko"] body.v3,html[lang="zh-Hant"] body.v3{--f-mincho:var(--cjk);--f-heading:var(--cjk);--f-body:'Jost',var(--cjk);--f-title:'Jost',var(--cjk);--f-en:'Jost',var(--cjk);--f-en-sub:'Jost',var(--cjk);font-family:var(--f-body)}
+html[lang="ko"] body.v3 .intro-en h2,html[lang="zh-Hant"] body.v3 .intro-en h2{font-family:var(--cjk);font-weight:500;font-size:20px;letter-spacing:.02em}
+html[lang="ko"] body.v3 .intro-en p,html[lang="zh-Hant"] body.v3 .intro-en p{font-family:var(--f-body);font-size:15px;line-height:1.95;letter-spacing:.02em}
+html[lang="zh-Hant"] body.v3 .intro-en p{text-align:justify}
+html[lang="ko"] body.v3 .times-cat,html[lang="zh-Hant"] body.v3 .times-cat,html[lang="ko"] body.v3 .v3-tag,html[lang="zh-Hant"] body.v3 .v3-tag{font-family:var(--cjk)}
+html[lang="ko"] body.v3 .drawer-nav,html[lang="zh-Hant"] body.v3 .drawer-nav,html[lang="ko"] body.v3 .footer-nav ul,html[lang="zh-Hant"] body.v3 .footer-nav ul{font-family:var(--f-body)}
+/* 改行：韓国語は語の途中で切らない。見出しは行の長さをそろえ、本文は最後の行が短くなりすぎないようにする */
+html[lang="ko"] body.v3{word-break:keep-all;overflow-wrap:break-word}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] .v3-catch,html[lang="ko"] .cta-lead,html[lang="zh-Hant"] h1,html[lang="zh-Hant"] h2,html[lang="zh-Hant"] h3,html[lang="zh-Hant"] .v3-catch,html[lang="zh-Hant"] .cta-lead{text-wrap:balance}
+html[lang="ko"] main p,html[lang="ko"] main dd,html[lang="ko"] main li,html[lang="zh-Hant"] main p,html[lang="zh-Hant"] main dd,html[lang="zh-Hant"] main li{text-wrap:pretty}
+.nb{white-space:nowrap}
+/* 言語メニューの名前は、どのページでもそれぞれの言語の書体で出す（layout.html で必要な字だけ読む） */
+body.v3 .lang-btn[lang="ja"]{font-family:'Noto Sans JP',sans-serif;font-weight:300}
+body.v3 .lang-btn[lang="en"]{font-family:'Jost',sans-serif;font-weight:300}
+body.v3 .lang-btn[lang="ko"]{font-family:'Noto Sans KR',sans-serif;font-weight:300}
+body.v3 .lang-btn[lang="zh-Hant"]{font-family:'Noto Sans TC',sans-serif;font-weight:300}
