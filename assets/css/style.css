@@ -451,7 +451,7 @@ p:last-child{margin-bottom:0}
 .sns-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .sns-icon svg .dot,.sns-icon svg .fill{fill:currentColor;stroke:none}
 /* UBAKU のサイト一覧（ubaku.jp のフッターと同じ並び） */
-.footer-family{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0;padding:0;font-family:var(--f-en-sub);font-size:13px;letter-spacing:.08em}
+.footer-family{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0;padding:0;font-family:var(--f-en);font-weight:300;font-size:12px;letter-spacing:.12em}
 .footer-family a{color:var(--on-green-sub);transition:color .4s}
 .footer-family a:hover,.footer-family a[aria-current]{color:var(--on-green)}
 .copyright{grid-column:1 / -1;font-family:var(--f-en-sub);font-size:12px;color:var(--on-green-sub);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid rgba(241,235,223,.14);padding-top:24px}
@@ -508,16 +508,27 @@ p:last-child{margin-bottom:0}
   .facts dd{margin-bottom:16px}
   .map{aspect-ratio:1 / 1}
   /* 行き方の図はスマホでは縦に並べる（矢印は下向き） */
-  .route{flex-direction:column;align-items:flex-start;gap:0}
-  .route .st{min-width:200px;padding:8px 14px;font-size:14px;text-align:left}
-  .route .go{flex:none;max-width:none;text-align:left;padding:10px 0 10px 28px;min-height:44px;display:flex;align-items:center}
-  .route .go::after{left:12px;right:auto;top:0;bottom:0;border-top:0;border-left:1px solid var(--green)}
-  .route .go::before{left:9px;right:auto;bottom:2px;transform:rotate(135deg)}
+  .routes{background:none;padding:0;gap:40px}
+  .routes-2{gap:28px}
+  .routes h3{margin:0 0 12px;font-size:16px;line-height:1.5}
+  .route{display:block;background:var(--white);padding:20px 22px}
+  .route + .route{margin-top:12px !important}
+  .route .st,.route .st.villa{position:relative;display:block;min-width:0;padding:0 0 0 22px;background:none;font-family:var(--f-mincho);font-size:15px;letter-spacing:.04em;line-height:1.6;text-align:left;white-space:normal;color:var(--green)}
+  .route .st::before{content:"";position:absolute;left:0;top:.5em;width:9px;height:9px;border:1px solid var(--gold);border-radius:50%;background:var(--white);box-sizing:border-box}
+  .route .st.villa{font-weight:500}
+  .route .st.villa::before{background:var(--green);border-color:var(--green)}
+  .route .go{position:relative;display:block;flex:none;min-width:0;max-width:none;min-height:0;padding:7px 0 7px 22px;font-size:12px;line-height:1.5;text-align:left}
+  .route .go::after{left:4px;right:auto;top:-.45em;bottom:-.45em;border-top:0;border-left:1px solid var(--gold)}
+  .route .go::before{display:none}
+  .small-note{margin-top:16px}
+  .course .photo img{aspect-ratio:8 / 3;width:100%;object-fit:cover;object-position:50% 50%}   /* 表紙の上下を25%ずつ切り、ロゴを真ん中に */
   .law th{width:38%}
   .site-footer .wrap,.site-footer .wrap.footer-main{grid-template-columns:1fr}
   .footer-main .footer-info{grid-template-columns:minmax(0,1fr);justify-self:start}
   .footer-op .wrap{grid-template-columns:1fr}
   .footer-op-end{justify-items:start}
+  .footer-family{display:grid;grid-template-columns:repeat(2,max-content);gap:8px 28px}   /* ubaku.jp と同じ 2×2 */
+  .hero-top .slide:first-child img{object-position:80% 50%}                                /* 看板が見える位置 */
 }
 
 /* 「動きを減らす」設定では全部止める */

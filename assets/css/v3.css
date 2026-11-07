@@ -229,7 +229,7 @@ body.v3 .photos .photo figcaption{left:auto;right:8px;bottom:5px;font-size:11px;
 
 /* 所要時間の一覧の見出し（交通拠点など）。真鍮に決定（2026-11-07 mashuさん） */
 .times-box{--acc:var(--gold-ink);--acc-line:var(--gold)}
-.times-cat{position:relative;margin-top:32px;padding-left:13px;font-family:'Murecho',sans-serif;font-weight:500;font-size:14px;line-height:1.4;letter-spacing:.14em;color:var(--acc)}
+.times-cat{position:relative;margin-top:32px;padding-left:13px;font-family:'Murecho',sans-serif;font-weight:500;font-size:16px;line-height:1.4;letter-spacing:.14em;color:var(--acc)}
 .times-cat::before{content:"";position:absolute;left:0;top:.15em;bottom:.15em;width:2px;background:var(--acc-line)}
 
 /* ---------- ⑨ News ---------- */
@@ -290,7 +290,7 @@ body.v3 .cta-btn:hover{background:var(--gold);border-color:var(--gold);color:#ff
 .v3-seal-letter em{font-family:var(--f-en);font-style:normal;font-weight:300;font-size:11px;line-height:1;letter-spacing:.14em;padding-left:.14em;color:var(--green);transition:color .4s ease}
 
 /* ---------- 予約のページ：大きさは 一文 20 / 見出し 16 / 本文 14 / 英文 13 / 注記 12 にそろえる ---------- */
-.rs-best{text-align:center;padding:clamp(22px,3vw,30px) 0;margin-bottom:clamp(24px,3vw,32px);border-top:1px solid rgba(185,151,91,.55);border-bottom:1px solid rgba(185,151,91,.55)}
+.rs-best{text-align:center;padding:clamp(20px,3vw,28px) 12px;margin-bottom:clamp(24px,3vw,32px);background:rgba(41,70,61,.07)}
 .rs-best p{margin:0}
 .rs-best .ja{font-family:var(--f-mincho);font-weight:500;font-size:clamp(18px,1.8vw,21px);letter-spacing:.1em;padding-left:.1em;color:var(--green)}
 body.v3 .doc .rs-best .en{font-family:var(--f-en);font-weight:300;font-size:14px;letter-spacing:.1em;padding-left:.1em;color:var(--gold-ink);margin-top:6px}
@@ -365,7 +365,8 @@ body.v3 .rm-sec .house-notes strong{display:block;color:var(--green)}
   .rm-feature .rm-big{grid-column:1 / -1}
   .rm-feature .rm-card{grid-column:1 / -1;grid-row:2;margin:0;left:0}
   body.v3 .rm-sec .house-notes{grid-template-columns:minmax(0,1fr)}
-  .rm-sub .rm-photo{grid-column:1 / 9}
+  .rm-sub .rm-photo{grid-column:1 / -1}
+  .rm-duo .rm-small{width:100%}
   .v3-points{grid-template-columns:1fr}
   .v3-num-row{grid-template-columns:repeat(3,1fr);row-gap:32px}
   .v3-num-row li:nth-child(4){border-left:none}
@@ -464,3 +465,29 @@ body.v3 .lang-btn[lang="ja"]{font-family:'Noto Sans JP',sans-serif;font-weight:3
 body.v3 .lang-btn[lang="en"]{font-family:'Jost',sans-serif;font-weight:300}
 body.v3 .lang-btn[lang="ko"]{font-family:'Noto Sans KR',sans-serif;font-weight:300}
 body.v3 .lang-btn[lang="zh-Hant"]{font-family:'Noto Sans TC',sans-serif;font-weight:300}
+
+/* ---------- 全言語の調整（2026-11-07 スマホの確認） ---------- */
+.ib{display:inline-block}                                  /* 区切りの位置でだけ改行する */
+.cta-lead{text-wrap:balance}
+body.v3 .times-box h3{font-size:18px}
+@media (max-width:600px){
+  .rs-best .ja{font-size:clamp(14px,4.1vw,18px);letter-spacing:.03em;padding-left:.03em;white-space:nowrap}
+}
+/* スマホでは全言語で、最後の行が1〜2文字だけにならないようにする */
+@media (max-width:760px){
+  main p,main dd,main li{text-wrap:pretty}
+  .hero-copy p{padding:0 20px;text-wrap:balance}
+}
+/* 繁体字：画面の幅が狭いと両端そろえで字の間隔がばらつくので、スマホでは左そろえ */
+@media (max-width:760px){
+  html[lang="zh-Hant"] main,html[lang="zh-Hant"] body.v3 .intro-en p,html[lang="zh-Hant"] .rm-note{text-align:start}
+}
+/* 指で操作する画面：Letter の説明は全文が見える場所に、押したときだけ出す */
+@media (hover:none){
+  .v3-seal-tip{top:auto;right:-16px;bottom:calc(100% + 10px);width:max-content;max-width:calc(100vw - 104px);padding:8px 14px;border-radius:14px;line-height:1.6;white-space:normal;transform:translateY(6px)}
+  .v3-seal-letter:hover .v3-seal-tip{opacity:0;transform:translateY(6px)}
+  .v3-seal-letter.is-open .v3-seal-tip{opacity:1;transform:none;pointer-events:auto}
+  .v3-seal-letter.is-open .v3-seal-tip::after{content:" →"}
+  .v3-seal-letter:hover{box-shadow:0 8px 22px rgba(20,30,26,.22)}
+  .v3-seal-letter.is-open{box-shadow:0 0 0 1.5px #23A0DA,0 8px 22px rgba(35,160,218,.3)}
+}

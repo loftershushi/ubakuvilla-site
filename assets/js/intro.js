@@ -25,7 +25,7 @@
     '.op.out svg{transform:scaleY(2.9);transition:transform 1.3s cubic-bezier(.6,0,.3,1)}' +   // 雪が画面いっぱいに積もる
     '.op svg path{fill:#FFFFFF}' +
     // ロゴ：少しぼけた状態から、にじむように現れる
-    '.op-logo{position:absolute;left:50%;top:31%;width:clamp(130px,26vh,230px);height:auto;transform:translate(-50%,calc(-50% + 10px));opacity:0;filter:blur(8px);transition:opacity 1.8s ease,filter 1.8s ease,transform 2.2s cubic-bezier(.2,.7,.2,1)}' +
+    '.op-logo{position:absolute;left:50%;top:31%;width:min(clamp(130px,26vh,230px),34vw);height:auto;transform:translate(-50%,calc(-50% + 10px));opacity:0;filter:blur(8px);transition:opacity 1.8s ease,filter 1.8s ease,transform 2.2s cubic-bezier(.2,.7,.2,1)}' +
     '.op.show .op-logo{opacity:1;filter:none;transform:translate(-50%,-50%)}' +
     // 英文：雪のように一文字ずつ降りてくる
     '.op-word{position:absolute;left:0;right:0;top:84%;margin:0;padding-left:.2em;text-align:center;transform:translateY(-50%);font-family:"Jost",sans-serif;font-weight:300;font-size:clamp(17px,2.4vh,22px);letter-spacing:.2em;color:#29463D;white-space:pre}' +

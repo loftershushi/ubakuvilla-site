@@ -206,12 +206,13 @@
   var cycle = function (root, items, ms, show, start) {
     var i = start, timer = null, seen = false, held = false;
     root.style.setProperty('--t', ms + 'ms');
-    var pick = function (n) {
+    var pick = function (n, byHand) {
       items[i].classList.remove('is-on');
       i = n;
       void items[i].offsetWidth;                   // 残り時間の線を最初から伸ばし直す
       items[i].classList.add('is-on');
       show(i);
+      if (byHand) run();                           // 指で選んだら、そこから時間を数え直す
     };
     var run = function () {
       clearInterval(timer);
@@ -250,7 +251,20 @@
   var ex = document.querySelector('[data-explore]');
   if (ex) {
     var goEx = wiper(ex.querySelector('.v3-wipe'));
-    cycle(ex, Array.prototype.slice.call(ex.querySelectorAll('.v3-ex-list li')), 4600, goEx, 0);
+    var exItems = Array.prototype.slice.call(ex.querySelectorAll('.v3-ex-list li'));
+    var pickEx = cycle(ex, exItems, 4600, goEx, 0);
+    // 指で操作する画面では、押すとページを移動せず、その場所の写真を見せる（詳しくは View More から）
+    if (window.matchMedia('(hover: none)').matches) {
+      var exPhoto = ex.querySelector('.v3-wipe');
+      exItems.forEach(function (li, n) {
+        li.querySelector('a').addEventListener('click', function (e) {
+          e.preventDefault();
+          pickEx(n, true);
+          var top = exPhoto.getBoundingClientRect().top;
+          if (top < 72) window.scrollBy({ top: top - 84, behavior: reduce ? 'auto' : 'smooth' });   // 写真が画面の上に隠れていたら見せる
+        });
+      });
+    }
   }
 
   /* ---------- 9. Story の写真 ---------- */
@@ -331,6 +345,18 @@
       '<svg viewBox="0 0 100 100" aria-hidden="true"><defs><path id="v3-ring" d="M50 50m-39 0a39 39 0 1 1 78 0a39 39 0 1 1-78 0"/></defs><text><textPath href="#v3-ring" textLength="240">RESERVE  ·  UBAKU VILLA  ·  RESERVE  ·  UBAKU VILLA  ·</textPath></text></svg>' +
       '<b>' + F.word + '</b></a>';
     document.body.appendChild(fab);
+    // 指で操作する画面：Letter は1回目で説明を見せ、もう一度押すと ubaku.jp へ
+    if (window.matchMedia('(hover: none)').matches) {
+      var letter = fab.querySelector('.v3-seal-letter'), letterTimer = null;
+      var closeLetter = function () { letter.classList.remove('is-open'); clearTimeout(letterTimer); };
+      letter.addEventListener('click', function (e) {
+        if (letter.classList.contains('is-open')) { closeLetter(); return; }
+        e.preventDefault();
+        letter.classList.add('is-open');
+        letterTimer = setTimeout(closeLetter, 6000);
+      });
+      document.addEventListener('click', function (e) { if (!letter.contains(e.target)) closeLetter(); });
+    }
     var heroEl = document.querySelector('.hero');
     var hideAt = document.querySelectorAll('.cta, .site-footer');   // 予約の帯・フッターが見えている間は隠す（同じ案内が2つ並ばないように）
     var place = function () {
