@@ -541,3 +541,14 @@ body.v3 .rm-icons figcaption{margin-top:4px;font-size:13px;line-height:1.5;lette
 /* Numbers の説明：<br> を書いた所だけで改行する（iPhone で2文字ずつに折れていた） */
 .v3-num-row .lbl{white-space:nowrap}
 
+/* ---------- 2026-11-14 所要時間の表と札（iPhone 確認） ---------- */
+/* 表の列は中身に押し広げられない（韓国語で右の時間が枠の外に出ていた） */
+.times{grid-template-columns:repeat(2,minmax(0,1fr))}
+.times div{align-items:baseline}
+.times dt{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+/* 「車で約30分」は1行のまま右にそろえる（両端そろえで字の間が開いていた） */
+body.v3 .times dd{flex:0 0 auto;white-space:nowrap;text-align:right;text-align-last:auto}
+/* 日帰り温泉の札：名前から半角1つ分ほど離す（全ページ） */
+body.v3 .v3-tag,body.v3 .v3-ex-list .nm .v3-tag{margin-left:12px}
+@media (max-width:900px){ .times{grid-template-columns:minmax(0,1fr)} }
+
