@@ -478,10 +478,6 @@ body.v3 .times-box h3{font-size:18px}
   main p,main dd,main li{text-wrap:pretty}
   .hero-copy p{padding:0 20px;text-wrap:balance}
 }
-/* 繁体字：画面の幅が狭いと両端そろえで字の間隔がばらつくので、スマホでは左そろえ */
-@media (max-width:760px){
-  html[lang="zh-Hant"] main,html[lang="zh-Hant"] body.v3 .intro-en p,html[lang="zh-Hant"] .rm-note{text-align:start}
-}
 /* 指で操作する画面：Letter の説明は全文が見える場所に、押したときだけ出す */
 @media (hover:none){
   .v3-seal-tip{top:auto;right:-16px;bottom:calc(100% + 10px);width:max-content;max-width:calc(100vw - 104px);padding:8px 14px;border-radius:14px;line-height:1.6;white-space:normal;transform:translateY(6px)}
@@ -496,3 +492,52 @@ body.v3 .times-box h3{font-size:18px}
 @media (max-width:760px){
   .v3-news .news-lines .t{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 }
+
+/* ---------- 2026-11-14 mashuさんの確認 ---------- */
+/* 本文の改行：text-wrap:pretty は iPhone では段落の全部の行を短くする。
+   → 日本語・繁体字は両端そろえで字の間が開き、英語・韓国語は右側が大きく空く。本文では使わず、行いっぱいまで並べる。
+   （最後の行が1語・数文字だけになるのは build.py の keep_tail で防ぐ） */
+html body.v3 main :is(p,dd,li):not(.hero-copy *,.cta-lead,.v3-catch){text-wrap:wrap}
+html[lang="zh-Hant"] body.v3 .intro-en p,html[lang="zh-Hant"] body.v3 .rm-note{text-align:justify}
+
+/* スマホの本文（日本語・繁体字・韓国語）：行間と字間を少し詰める。冒頭の文 2.2 → 1.9、本文 2.0 → 1.9 */
+@media (max-width:760px){
+  html:not([lang="en"]) body.v3{line-height:1.9;letter-spacing:.02em}
+  html:not([lang="en"]) body.v3 .page-head-text,html:not([lang="en"]) body.v3 .page-head-ja{line-height:1.9;letter-spacing:.02em}
+  html:is([lang="ko"],[lang="zh-Hant"]) body.v3 .intro-en p{line-height:1.9;letter-spacing:.01em}
+}
+/* 英語：ふつうの英語のサイトに近い行間（2.0 → 1.75）と字間に。パソコンも同じ */
+html[lang="en"] body.v3{line-height:1.75;letter-spacing:.02em}
+html[lang="en"] body.v3 main :is(p,dd,li):not(.hero-copy *,.cta-lead,.v3-catch,.kicker){line-height:1.75;letter-spacing:.02em}
+
+/* アメニティ：一覧は小さな枠に入れて、1つずつ読めるように */
+body.v3 .rm-amenity .amenity-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+body.v3 .rm-amenity .amenity-list li{padding:3px 12px;border:1px solid rgba(41,70,61,.28);border-radius:2px;background:var(--white);font-size:13px;line-height:1.8;letter-spacing:.02em;text-align:start}
+body.v3 .rm-amenity .amenity-list li::before{content:none}
+/* アイコン：絵は画像、名前は文字（前は1枚の図で、スマホでは字が小さすぎた） */
+.rm-icons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.4vw,32px) 8px;list-style:none;margin:0;padding:clamp(28px,3.4vw,44px) clamp(12px,2vw,28px);background:rgb(41,70,61)}
+.rm-icons figure{margin:0;text-align:center}
+.rm-icons img{display:block;width:100%;max-width:120px;height:auto;margin:0 auto}
+body.v3 .rm-icons figcaption{margin-top:4px;font-size:13px;line-height:1.5;letter-spacing:.04em;color:var(--gold-light);text-align:center}
+@media (max-width:600px){
+  .rm-icons{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 6px;padding:24px 10px}
+  body.v3 .rm-icons figcaption{font-size:12px;letter-spacing:.02em}
+}
+/* ニュースの中の YouTube：横幅いっぱい・16:9 */
+.prose .video{position:relative;aspect-ratio:16 / 9;margin:28px 0}
+.prose .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* 英語のスマホ：長いリンクの文字は折り返す */
+@media (max-width:600px){ .v3-link .more{white-space:normal} }
+
+/* スマホの本文（日本語・繁体字・韓国語）：場所ごとに 2.0〜2.2 と決めていた行間も 1.9 にそろえる */
+@media (max-width:760px){
+  html:not([lang="en"]) body.v3 :is(.v3-head p,.v3-text p:not(.v3-catch),.rm-sec p,.v3-story-text p:not(.v3-catch),.v3-points p,.prose,.v3-season .cap p){line-height:1.9}
+}
+@media (max-width:760px){
+  html[lang="ja"] body.v3 .intro-ja p{line-height:1.9}      /* トップのはじめの紹介（スマホは横書き）も本文と同じ行間に */
+}
+/* 札は1つのまとまり（中で改行しない） */
+.v3-tag{white-space:nowrap}
+/* Numbers の説明：<br> を書いた所だけで改行する（iPhone で2文字ずつに折れていた） */
+.v3-num-row .lbl{white-space:nowrap}
+
