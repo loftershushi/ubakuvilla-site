@@ -33,5 +33,8 @@
   if (/^zh\b/.test(first)) { target = page('zh-Hant'); if (!target) { return; } }   // 繁体字のページがなければ日本語のまま
   else if (/^ko\b/.test(first)) { target = page('ko') || page('en'); }
   else { target = page('en'); }
+  // 移す前に、元の参照元（Google 検索など）を覚えておく。移った先のページの GA4 が受け取る（2026-11-15）
+  // （覚えないと、移った先では「自分のサイトから来た」に見え、海外の人の流入元が消えるため）
+  try { var ref = document.referrer; if (ref && ref.indexOf(location.host) < 0) { sessionStorage.setItem('ubaku-ref', ref); } } catch (e) { /* 覚えられなくても移動はする */ }
   if (target) { location.replace(target.replace(/^https?:\/\/[^/]+/, '') + location.search + location.hash); }
 })();
