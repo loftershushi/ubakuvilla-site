@@ -552,3 +552,16 @@ body.v3 .times dd{flex:0 0 auto;white-space:nowrap;text-align:right;text-align-l
 body.v3 .v3-tag,body.v3 .v3-ex-list .nm .v3-tag{margin-left:12px}
 @media (max-width:900px){ .times{grid-template-columns:minmax(0,1fr)} }
 
+/* ---------- 2026-11-15 記事の題：「｜」で行を分ける（build.py の title_html） ---------- */
+.t-br{display:block;height:0}
+/* 記事の写真のひとこと */
+.prose figure figcaption{margin-top:8px;font-size:12px;line-height:1.6;letter-spacing:.04em;color:var(--sub);text-align:left}
+/* 日本語・繁体字の題は語の途中で切らない（区切りは build.py が入れる <wbr>） */
+.t-cjk{word-break:keep-all;overflow-wrap:anywhere}
+/* 前後の記事：スマホでは上下に並べる（横に2つだと幅が狭く、題が細かく折れる） */
+@media (max-width:600px){
+  .article-nav{flex-direction:column;gap:18px}
+  .article-nav a{max-width:none}
+  .article-nav a[style*="right"]{align-self:flex-end}
+}
+
