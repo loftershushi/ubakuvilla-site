@@ -552,3 +552,20 @@ main:lang(en),main:lang(ko),.footer-op-text:lang(en),.footer-op-text:lang(ko){te
 :where(main [lang="en"]:not(:is(.hero-copy,.cta,.rs-best,.facts-row,.choice-catch,[style*="text-align:center"],[style*="text-align: center"]) *)){text-align:start}
 /* 韓国語は単語の途中で改行しない */
 main :lang(ko){word-break:keep-all}
+/* 記事の中の表（2026-11-18）：短い言葉が並ぶので両端そろえにしない（字の間が開くため）。
+   所要時間の表（.times-table）は、右の時間を右そろえ・1行（改行しない） */
+main [data-type="table"] :is(th,td){text-align:start}
+main .times-table td:last-child{white-space:nowrap;text-align:end;width:1%}
+html body main .times-table td:last-child p{white-space:nowrap;text-wrap:nowrap;text-align:end}
+main .times-table th:last-child{text-align:end}
+/* 記事の縦長の写真（2026-11-18）：パソコンで大きくなりすぎないよう幅に上限 */
+main figure.tall img{width:100%;max-width:480px;height:auto}
+/* 2026-11-18 表の左右の列のあいだに隙間をあける（全言語の記事の表） */
+main [data-type="table"] :is(th,td):not(:last-child){padding-inline-end:1.5em}
+/* 前後の記事のリンク：両端そろえで字の間が開かないよう、左（次の記事は右）にそろえる */
+html body main .article-nav a,html body main .article-nav a *{text-align:start;text-align-last:auto;text-justify:auto;letter-spacing:normal}
+html body main .article-nav a:last-child,html body main .article-nav a:last-child *{text-align:end}
+/* 比較表の左の列（短い見出し）は日本語・繁体字では途中で改行しない（「夕／食」のような1文字だけの行を作らない） */
+html body main :is(:lang(ja),:lang(zh-Hant)) .compare-table td:first-child p{white-space:nowrap;text-wrap:nowrap}
+/* 表のセルは上にそろえる（左の見出しが行の真ん中に浮かないように） */
+main [data-type="table"] :is(th,td){vertical-align:top}
