@@ -178,7 +178,7 @@ p:last-child{margin-bottom:0}
 .photos.four{grid-template-columns:repeat(4,1fr)}
 .photo{position:relative;overflow:hidden;background:rgba(0,0,0,.06);margin:0}
 .photo img{width:100%;aspect-ratio:3 / 2;object-fit:cover}   /* 写真のもとの比率。切りすぎない（2026-11-07） */
-.course .photo img{aspect-ratio:4 / 3}   /* ニュースの表紙は 4:3 で作ってある */
+.course .photo img{aspect-ratio:1280 / 670}   /* ニュースの表紙は note と同じ横長 1280×670（2026-11-19） */
 .photo.tall img{aspect-ratio:3 / 4}
 .photo figcaption,.photo .cap{position:absolute;left:12px;bottom:8px;font-family:var(--f-en-sub);font-size:13px;color:var(--white);text-shadow:0 0 8px rgba(0,0,0,.4);letter-spacing:.04em}
 .photo.cap-below figcaption{position:static;color:inherit;text-shadow:none;padding-top:8px;font-family:var(--f-body);font-size:13px}
@@ -255,8 +255,8 @@ p:last-child{margin-bottom:0}
 /* ---------- ニュース一覧ページ ---------- */
 .news-cards{list-style:none;margin:0 auto;padding:0;max-width:920px}
 .news-cards li{border-bottom:1px solid var(--line)}
-.news-cards a{display:grid;grid-template-columns:minmax(0, 42%) 1fr;gap:clamp(24px, 4vw, 48px);align-items:center;padding:clamp(28px, 3.4vw, 40px) 0}
-.news-cards .photo img{aspect-ratio:4 / 3}
+.news-cards a{display:grid;grid-template-columns:minmax(0, 46%) 1fr;gap:clamp(24px, 4vw, 48px);align-items:center;padding:clamp(28px, 3.4vw, 40px) 0}
+.news-cards .photo img{aspect-ratio:1280 / 670}   /* note の表紙と同じ横長（2026-11-19） */
 .news-cards time{font-family:var(--f-en-sub);font-size:14px;color:var(--sub)}
 .news-cards h2{font-family:var(--f-mincho);font-size:clamp(15px, 1.5vw, 18px);color:var(--green);margin:6px 0 10px;line-height:1.7}
 .news-cards p{font-size:13px;line-height:1.9;color:var(--sub);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -503,7 +503,7 @@ p:last-child{margin-bottom:0}
   .choice-catch{top:calc(var(--header-h) + 16px);font-size:15px}
   .news-lines a{grid-template-columns:1fr 16px;gap:4px 12px}
   .news-lines time{grid-column:1 / -1}
-  .news-cards a{grid-template-columns:1fr}
+  .news-cards a{grid-template-columns:1fr;gap:16px}   /* 写真と文字は近く、記事と記事の間（上下28px）より狭くしてまとまりを見せる */
   .facts{grid-template-columns:1fr;gap:4px}
   .facts dd{margin-bottom:16px}
   .map{aspect-ratio:1 / 1}
@@ -521,7 +521,6 @@ p:last-child{margin-bottom:0}
   .route .go::after{left:4px;right:auto;top:-.45em;bottom:-.45em;border-top:0;border-left:1px solid var(--gold)}
   .route .go::before{display:none}
   .small-note{margin-top:16px}
-  .course .photo img{aspect-ratio:8 / 3;width:100%;object-fit:cover;object-position:50% 50%}   /* 表紙の上下を25%ずつ切り、ロゴを真ん中に */
   .law th{width:38%}
   .site-footer .wrap,.site-footer .wrap.footer-main{grid-template-columns:1fr}
   .footer-main .footer-info{grid-template-columns:minmax(0,1fr);justify-self:start}
