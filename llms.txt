@@ -7,6 +7,7 @@
 
 - 正式名：UBAKU Villa 宇莫別荘（読み：うばくびら・うばくべつそう）
 - 種類：一棟貸しの宿・貸切宿・別荘（旅館業の許可を取った宿）
+- 広さ：敷地 約1,800㎡、建物 約117㎡
 - 建物：1968年築、半世紀を超えて受け継がれてきた元農家住宅を改修。寝室3室と多目的室（多目的室も寝室として使えるので、4部屋とも寝室として使えます）、100インチスクリーンのリビング、フルキッチン、洗濯機
 - 定員：1〜10名、1日1組限定。ご予約は2泊から
 - チェックイン 15:00／チェックアウト 10:00。無人チェックイン（前日に開錠番号をお知らせ）
@@ -21,6 +22,7 @@
 
 - Name: UBAKU Villa 宇莫別荘 (Ubakubetsuso)
 - Type: private whole-house rental villa, licensed under Japan's Hotel Business Act
+- Size: site about 1,800 m², building about 117 m²
 - Building: a former farmhouse built in 1968, renovated. 3 bedrooms plus a multi-purpose room that can also be used as a bedroom (4 sleeping rooms in total), living room with a 100-inch screen, full kitchen, washing machine
 - Capacity: 1–10 guests, one group per day. Minimum stay: 2 nights
 - Check-in 15:00 / check-out 10:00. Self check-in (door code sent the day before)
@@ -33,7 +35,7 @@
 
 ## ページ（日本語）
 
-- [UBAKU Villa 宇莫別荘](https://ubakuvilla.com/): 北海道・美瑛の森の中に佇む一棟貸しの別荘・貸切宿「UBAKU Villa 宇莫別荘」。1968年築、半世紀を超えて受け継がれてきた元農家住宅をフルリノベーション。1日1組限定、1〜10名で一棟まるごと貸切。旭川空港から車で約18分。
+- [UBAKU Villa 宇莫別荘](https://ubakuvilla.com/): 北海道美瑛の一棟貸し別荘・貸切宿。1968年築、半世紀を超えて受け継がれてきた元農家住宅（古民家）を改修。敷地約1,800㎡・建物約117㎡を1日1組・最大10名で貸切。宇莫別川のせせらぎと星空。無料高速Wi-Fi、フルキッチン、駐車場つき。旭川空港から車で約18分。
 - [Access アクセス 旭川空港18分](https://ubakuvilla.com/access): UBAKU Villa 宇莫別荘へのアクセス。旭川空港から車で約18分、美瑛駅から車で約10分、旭川駅から車で約35分、富良野エリアのラベンダー畑（ファーム富田）まで車で約40分。公共交通機関がないため、レンタカー必須です。
 - [Contact お問い合わせ](https://ubakuvilla.com/contact): UBAKU Villa 宇莫別荘へのお問い合わせはこちらから。宿泊やご予約、設備、アクセスに関するご質問・ご相談を承ります。
 - [Explore Biei 美瑛の楽しみ方](https://ubakuvilla.com/explore): 北海道・美瑛の一棟貸し宿 UBAKU Villa 宇莫別荘を拠点にした、美瑛・富良野の楽しみ方。青い池や四季彩の丘などの定番から、図書館やカフェで暮らすように過ごす長期滞在まで。
