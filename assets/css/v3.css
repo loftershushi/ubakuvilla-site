@@ -572,3 +572,9 @@ body.v3 .v3-tag,body.v3 .v3-ex-list .nm .v3-tag{margin-left:12px}
 @media (max-aspect-ratio: 3/4){
   .hero-top .slide:first-child img{object-position:50% 50%}
 }
+/* 2026-11-25 スマホ点検：段落の終わりの言葉をひとかたまりにする（最後の行が1〜2字だけにならないように）。pages の中で <span class="nw"> を使う */
+.nw{white-space:nowrap}
+/* 2026-11-25 スマホ点検：Room の定員の段落は、英語・韓国語では左そろえ（共通ルール。日本語・繁体字は両端そろえのまま） */
+@media (max-width:900px){
+  html[lang="en"] body.v3 .rm-note,html[lang="ko"] body.v3 .rm-note{text-align:left}
+}
