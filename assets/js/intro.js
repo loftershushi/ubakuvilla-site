@@ -3,11 +3,18 @@
    流れ：静かに雪が降り、下から白い丘が積もる
      → 上の6割にロゴがにじむように現れ、白い丘に英文が一文字ずつ降りてくる
      → 文字が消え、雪が画面いっぱいに積もって真っ白になり、その白がほどけて写真が現れる
-   ・トップを開くたびに毎回出す（2026-11-07 mashuさん。パソコン・スマホとも）
+   ・1回出したら、その端末では7日間出さない（2026-11-24 mashuさん。3サイト共通・UBAKU Letter の札と同じ。
+     前は「開くたびに毎回」だった）。4言語のトップで共通。確認は URL の最後に ?intro（必ず出す）／?nointro（出さない）
    ・画面を押すと飛ばせる。「動きを減らす」設定の人には出さない
    ========================================================= */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // 7日に1回だけ（最後に出した日時を、この端末のブラウザに覚えておく）
+  var q = location.search, KEY = 'ubakuIntro', last = 0;
+  try { last = +localStorage.getItem(KEY) || 0; } catch (e) {}
+  if (q.indexOf('nointro') >= 0) return;
+  if (q.indexOf('intro') < 0 && Date.now() - last < 7 * 864e5) return;
+  try { localStorage.setItem(KEY, Date.now()); } catch (e) {}
   document.documentElement.classList.add('is-intro');   // main.js がこれを見て、hero の切り替えを待つ
 
   var css = document.createElement('style');
