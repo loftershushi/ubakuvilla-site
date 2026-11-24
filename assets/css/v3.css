@@ -565,3 +565,10 @@ body.v3 .v3-tag,body.v3 .v3-ex-list .nm .v3-tag{margin-left:12px}
   .article-nav a[style*="right"]{align-self:flex-end}
 }
 
+
+/* トップの最初の写真：スマホなど縦長の画面では縦長に切り抜いた版（<picture>）を使う（2026-11-24 mashuさん OK）
+   縦長版は主役が真ん中に来るよう切ってあるので、看板の写真の「右寄せ（80%）」はかけない */
+.hero-top .slide picture{display:block;width:100%;height:100%}
+@media (max-aspect-ratio: 3/4){
+  .hero-top .slide:first-child img{object-position:50% 50%}
+}
