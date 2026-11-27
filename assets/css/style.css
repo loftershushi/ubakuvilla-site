@@ -568,3 +568,9 @@ html body main .article-nav a:last-child,html body main .article-nav a:last-chil
 html body main :is(:lang(ja),:lang(zh-Hant)) .compare-table td:first-child p{white-space:nowrap;text-wrap:nowrap}
 /* 表のセルは上にそろえる（左の見出しが行の真ん中に浮かないように） */
 main [data-type="table"] :is(th,td){vertical-align:top}
+
+/* 記事の中の小さな写真の並び（2行2枚ずつ）。記事020の寝室＋多目的スペース（2026-11-27 mashuさん） */
+.prose .fig-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 12px;margin:2em 0}
+.prose .fig-grid figure{margin:0}
+.prose .fig-grid img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.prose .fig-grid figcaption{font-size:12px;padding-top:6px;line-height:1.5}
